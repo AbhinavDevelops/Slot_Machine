@@ -36,7 +36,7 @@ ValAgents agent_picker (){
 
     std::cout << "Pick your agent from Jett,Reyna,Raze,Iso,Pheonix,Yoru";
 
-    std::cin >> user_selection;
+    // std::cin >> user_selection;
 
     return user_selection;
 }
