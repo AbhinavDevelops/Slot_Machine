@@ -28,15 +28,24 @@ std::ostream& operator<<(std::ostream& os, const ValAgents& agent) {
     return os;
 }
 
+
+std::map<int, ValAgents> AgentMap {{1,ValAgents::Jett},{2, ValAgents::Reyna},{3,ValAgents::Raze},{4,ValAgents::Pheonix},{5,ValAgents::Iso},{6,ValAgents::Yoru}};
+
 // use a dictionary to make more intuitive on how the agents are selected
 
 ValAgents agent_picker (){
 
-    ValAgents user_selection;
+    int user_number = 3;
 
-    std::cout << "Pick your agent from Jett,Reyna,Raze,Iso,Pheonix,Yoru";
 
-    // std::cin >> user_selection;
+    std::cout << "Pick your agent from Jett: 1, Reyna: 2, Raze:3,Iso:4,Pheonix:5,Yoru:6" << std::endl;
+
+    std::cin >> user_number;
+
+
+    ValAgents user_selection = AgentMap[user_number];
+
+    std:: cout << "user selected:" << user_selection << std::endl;
 
     return user_selection;
 }
@@ -45,19 +54,11 @@ ValAgents agent_picker (){
 int main (){
 
 
-    std::map<ValAgents, std::string> AgentMap {{ValAgents::Jett, "Jett"},{ValAgents::Reyna, "Reyna"}};
 
     for (auto const& pair : AgentMap){
         std::cout << "Key:" << pair.first << "Value:" << pair.second << std::endl;
     }
 
-    std::string lang;
-
-    lang = "skhdfdsh";
-    
-    std::cout << lang ;
-
-    std::cout << lang;
 
     ValAgents user_selection = agent_picker();
 
