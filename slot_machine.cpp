@@ -45,7 +45,7 @@ ValAgents agent_picker (){
 
     ValAgents user_selection = AgentMap[user_number];
 
-    std:: cout << "user selected:" << user_selection << std::endl;
+    std:: cout << "The agent the user selected:" << user_selection << std::endl;
 
     return user_selection;
 }
