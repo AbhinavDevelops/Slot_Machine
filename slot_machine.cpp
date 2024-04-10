@@ -56,39 +56,101 @@ std::array<int,3> generate_reel(){
 
     std::array<int,3> reel;
 
+    for (static int i = 0; i< 3; ++i){
+        int random = rand()%6 + 1;
 
+        // could add a sleep function here to imitate the slow rolling of the reel
 
-    int row1 = rand()%6 + 1;
-    int row2 = rand()%6 + 1;
-    int row3 = rand()%6 + 1;
-
-    reel[0] = row1;
-    reel[1] = row2;
-    reel[2] = row3;
+        reel[i] = random;
+        // std::cout << "rand is" << random << std::endl;
+    }
 
     return reel;
 }
 
-int calc_money_made(std::array<int,3> reel, int bet, ValAgents user_selection){
+int calc_win_award(std::array<int,3> reel,int bet, ValAgents user_selection){
+
+    int moneyWon = -bet ;
+
+    int multiplier = 1;
+
+    bool same = (reel[0] == reel[1] && reel[2]== reel[1]);
+
+    for (int i = 0; i<3; ++i){
+       if (reel[i] == static_cast<int>(user_selection)){
+        multiplier += 0.15;
+
+        std:: cout << AgentMap[reel[i]] << " " << user_selection << std::endl;
+       }
+    }
+
+    if(same) multiplier *= 2;
 
 
+    std::cout << "multiplier is" << multiplier << std::endl;
+    if (multiplier > 1) return moneyWon * -multiplier;
+   return moneyWon;
 
 }
 
+int simulate_roll (int bet, ValAgents user_selection){
+
+
+    srand(time(nullptr));
+
+
+    std::array<int,3> reel = generate_reel();
+
+      for (int i: reel){
+
+        // std::cout << i << std::endl;
+        
+        std::cout << "rows are " << AgentMap[i] << std::endl;
+
+    }
+
+
+
+
+    int money_won = calc_win_award(reel,bet, user_selection);
+
+    std::cout << "You won " << money_won << " Dollars" << std::endl;
+
+    return money_won;
+}
 
 int main (){
 
 
-
-    for (auto const& pair : AgentMap){
-        std::cout << "Key:" << pair.first << "Value:" << pair.second << std::endl;
-    }
+    // for (auto const& pair : AgentMap){
+    //     std::cout << "Key:" << pair.first << "Value:" << pair.second << std::endl;
+    // }
 
 
     ValAgents user_selection = agent_picker();
 
-    std::array<int,3> reel = generate_reel();
+    
 
+    int bet;
+
+    std::cout << "How much do you want to bet for this roll, enter an integer value" << std::endl;
+    
+    std::cin >> bet;
+    
+    std::cout << "How many rounds do you want to play" << std::endl;
+    
+    int rounds;
+
+    std::cin >> rounds;
+
+    int money_gained = rounds * bet;
+
+    for (static int i = 1; i <= rounds; ++i){
+        int money_won = simulate_roll(bet, user_selection);
+        money_gained += money_won;
+    }
+
+    std::cout << "You have made " << money_gained << " dollars";
 
     return 0;
 }
