@@ -62,8 +62,10 @@ std::array<int,3> generate_reel(){
         // could add a sleep function here to imitate the slow rolling of the reel
 
         reel[i] = random;
-        // std::cout << "rand is" << random << std::endl;
+        std::cout << "rand is" << random << std::endl;
     }
+
+    std::cout << reel[0] << std::endl;
 
     return reel;
 }
@@ -96,14 +98,14 @@ int calc_win_award(std::array<int,3> reel,int bet, ValAgents user_selection){
 int simulate_roll (int bet, ValAgents user_selection){
 
 
-    srand(time(nullptr));
+    
 
 
     std::array<int,3> reel = generate_reel();
 
       for (int i: reel){
 
-        // std::cout << i << std::endl;
+        std::cout << i << std::endl;
         
         std::cout << "rows are " << AgentMap[i] << std::endl;
 
@@ -120,6 +122,9 @@ int simulate_roll (int bet, ValAgents user_selection){
 }
 
 int main (){
+
+
+    srand(time(nullptr));
 
 
     // for (auto const& pair : AgentMap){
