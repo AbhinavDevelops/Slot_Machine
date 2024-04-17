@@ -50,7 +50,7 @@ ValAgents agent_picker (){
 
     ValAgents user_selection = AgentMap[user_number];
 
-    std:: cout << "The agent the user selected:" << user_selection << std::endl;
+  //  std:: cout << "The agent the user selected:" << user_selection << std::endl;
 
     return user_selection;
 }
@@ -64,7 +64,7 @@ std::array<int, 3> generate_reel() {
     std::array<int, 3> reel;
     for (int i = 0; i < 3; ++i) {
         reel[i] = numbers[i];
-        std::cout << "rand is " << reel[i] << std::endl;
+      //  std::cout << "rand is " << reel[i] << std::endl;
     }
 
     return reel;
@@ -72,32 +72,35 @@ std::array<int, 3> generate_reel() {
 
 int calc_win_award(std::array<int,3> reel, int* bet, ValAgents user_selection){
 
-    int moneyWon = -(*bet) ;
+    float moneyWon = -(*bet) ;
 
-    int multiplier = 1;
+    float multiplier = 1;
 
     bool same = (reel[0] == reel[1] && reel[2]== reel[1]);
 
     for (int i = 0; i<3; ++i){
-       if (reel[i] == static_cast<int>(user_selection)){
-        multiplier += 0.15;
+       if (AgentMap[reel[i]] == user_selection){
 
-        std:: cout << AgentMap[reel[i]] << " " << user_selection << std::endl;
+        multiplier = multiplier + 0.15;
+
+        std:: cout << "you should have won and multiplier is " << multiplier << std::endl;
+
+      //  std:: cout << AgentMap[reel[i]] << " " << user_selection << std::endl;
        }
     }
 
     if(same) multiplier *= 2;
 
+    moneyWon = moneyWon*(-multiplier) - *bet;
 
-    std::cout << "multiplier is" << multiplier << std::endl;
-    if (multiplier > 1) return moneyWon * -multiplier;
+   // std::cout << "multiplier is" << multiplier << std::endl;
    return moneyWon;
 
 }
 
 
 
-int run_roll (ValAgents user_selection){
+int run_roll (ValAgents user_selection, int* bet){
 
 
     srand(time(nullptr));
@@ -108,11 +111,7 @@ int run_roll (ValAgents user_selection){
     // }
 
     
-    int* bet = new int;
-
-    std::cout << "How much do you want to bet for this roll, enter an integer value" << std::endl;
     
-    std::cin >> *bet;
     
     std::cout << "How many rounds do you want to play" << std::endl;
     
@@ -138,6 +137,7 @@ int main(){
 
     ValAgents user_selection = agent_picker();
 
+    int jackpot = 0;
 
 
     int moneywon;
@@ -151,9 +151,23 @@ int main(){
 
     for (int i = 0; i <= rounds; i++){
 
-        int win = run_roll (user_selection);
 
-        std::cout << "Money won in round: " << i << "is: " << win << std::endl;
+        int* bet = new int;
+
+        std::cout << "How much do you want to bet for this roll, enter an integer value" << std::endl;
+
+
+        std::cin >> *bet;
+
+        int win = run_roll (user_selection ,bet );
+ 
+
+        std::cout << "Money won in round: " << i << " is: " << win << std::endl;
+
+        jackpot += win;
+
+
+        std::cout << "jackpot is: " << jackpot << std::endl; 
 
         
     }
