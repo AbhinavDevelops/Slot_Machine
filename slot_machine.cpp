@@ -125,7 +125,7 @@ int run_roll (ValAgents user_selection, int* bet){
             std::cout << AgentMap[i] << std::endl;
     }
 
-    int moneywon = calc_win_award(reel, bet, user_selection);
+    float moneywon = calc_win_award(reel, bet, user_selection);
 
     std::cout << "You have made " << moneywon << " dollars" << std::endl;
 
@@ -137,10 +137,16 @@ int main(){
 
     ValAgents user_selection = agent_picker();
 
+    int deposit;
+
+    std::cout << "How much do you want to deposit into your bank" << std::endl;
+
+    std::cin >> deposit;
+
     int jackpot = 0;
 
 
-    int moneywon;
+    float moneywon;
 
 
     int rounds;
@@ -152,19 +158,34 @@ int main(){
     for (int i = 0; i <= rounds; i++){
 
 
+
         int* bet = new int;
 
-        std::cout << "How much do you want to bet for this roll, enter an integer value" << std::endl;
+         std::cout << "How much do you want to bet for this roll, enter an integer value" << std::endl;
 
-
+         
         std::cin >> *bet;
+
+
+        while (*bet > deposit){
+            std::cout << "Your current balance is " << deposit <<" Your bet cannot be place try a different number" << std::endl; 
+            std::cin >> *bet;
+        }
+
+       
+
+        deposit -= *bet;
+
+       
+
+        jackpot += *bet;
+
 
         int win = run_roll (user_selection ,bet );
  
 
         std::cout << "Money won in round: " << i << " is: " << win << std::endl;
 
-        jackpot += win;
 
 
         std::cout << "jackpot is: " << jackpot << std::endl; 
@@ -175,3 +196,7 @@ int main(){
     return 0;
 
 }
+
+// things to do 
+// add feature to either win the whole jackpot or take winnings from that around anf lose the jackpot
+// 
