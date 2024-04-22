@@ -1,0 +1,44 @@
+/* Welcome.css */
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+  }
+  
+  .welcome-content {
+    text-align: center;
+    margin-right: 50px;
+  }
+  
+  .welcome-title {
+    font-size: 36px;
+    color: #333;
+  }
+  
+  .welcome-description {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .play-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .play-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .welcome-image {
+    max-width: 400px;
+    height: auto;
+  }
+  

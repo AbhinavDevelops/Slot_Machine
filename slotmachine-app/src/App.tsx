@@ -1,10 +1,16 @@
-import Message from './Message';
+import { Fragment } from 'react/jsx-runtime';
+
+import Message from './components/Message';
+import Welcome from './components/welcome';
 
 function App(){
     return (
-      <div>
-        <Message />
-      </div>
+      <Fragment>
+        <Welcome />
+        
+{/* 
+        <Message /> */}
+      </Fragment>
     )
 }
 
